@@ -37,9 +37,10 @@ export default new Router({
     },
 
     {
-      path: '/matchdetails',
+      path: '/matchdetails/:id',
       name: 'matchdetails',
-      component: Matchdetails
+      component: Matchdetails,
+      props: true
     },
 
     {
