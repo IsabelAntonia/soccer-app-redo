@@ -36,7 +36,7 @@
 
                   <v-list-tile-title class="m-3 mt-4 mb-4">
                      <v-icon class="mr-2">schedule</v-icon>
-                     <router-link to="/home">Schedule</router-link>
+                     <router-link to="/schedule">Schedule</router-link>
                  </v-list-tile-title>
                  <v-divider></v-divider>
 

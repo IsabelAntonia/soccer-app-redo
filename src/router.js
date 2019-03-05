@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Schedule from './views/Schedule.vue'
+// import Schedule from './views/Schedule.vue'
 import Chat from './views/Chat.vue'
 import Login from './views/Login.vue'
 import Signup from './views/Signup.vue'
 import Matchdetails from './views/Matchdetails.vue'
+import Schedule from './views/Schedule.vue'
 
 Vue.use(Router)
 
