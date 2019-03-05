@@ -1,7 +1,7 @@
 <template>
-  <div class="schedule">
+  <div style="height: 100%; display: flex; align-items: center; justify-content: center" class="schedule">
 
-      <div v-if="isLoading" class="loader" style="text-align:center">
+      <div v-if="isLoading" class="loader" style="text-align:center; margin-top: 40px;">
 
 
 
@@ -26,17 +26,52 @@
 
 
 
-      <div v-else>
-      <div v-if="isErrored">Sorry! At the moment we are unable to receive the information.</div>
+      <div style="height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" v-else>
+      <div style="display: flex; height: 100%; justify-content: center; align-items: center" v-if="isErrored">
+
+        <div style="text-align: center; font-weight: bold; font-size: 20px;">
+        <p>Sorry! At the moment we are unable to receive the information.</p>
+        <p>{{error}}</p>
+        </div>
+    
+
+
+      </div>
+
+
+
+<v-card style="height: 480px; width: 300px; margin-bottom: 55px; ">
+
+      <p style='color: orange; text-align: center; margin-top: 20px; font-size: 20px; font-weight: bold'>Upcoming matches</p>
+
+
+
+      <p style='color: orange; text-align: center; margin-top: 40px; margin-bottom: 20px'>Click on one to receive more information.</p>
  
     
                
-         <div v-for="(element, index) in matches" :key ="element.matchId">
+         <!-- <div v-for="(element, index) in matches" :key ="element.matchId">
    <router-link :to="{ path: `/matchdetails/${index}`}">
          <h3 >{{element.name}}</h3>
          </router-link>
               
-          </div>
+          </div> -->
+
+
+                  <!-- <div style=" margin: 0!important" v-for="(element, index) in matches" :key ="element.matchId">
+   <v-btn style="padding: 20px; width: 260px; margin-bottom: 4%;" flat outline color="orange" :to="{ path: `/matchdetails/${index}`}">
+         <p style="margin: 0; font-size: 11px">{{element.t1name}} vs. {{element.t2name}}</p> -->
+
+                          
+   <v-btn v-for="(element, index) in matches" :key ="element.matchId" style="padding: 20px; width: 260px; margin-bottom: 4%;" flat outline color="orange" :to="{ path: `/matchdetails/${index}`}">
+         <p style="margin: 0; font-size: 11px">{{element.t1name}} vs. {{element.t2name}}</p>
+         
+         
+         </v-btn>
+              
+          
+
+          </v-card>
           
           
         </div>
@@ -64,10 +99,14 @@
 
     isErrored(){
       return this.$store.state.errored;
+     
     },
 
     isLoading(){
       return this.$store.state.isLoading;
+    },
+    error (){
+      return this.$store.state.error;
     }
 
   

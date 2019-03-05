@@ -85,7 +85,7 @@ export default {
       /* background-repeat: no-repeat; */
         position: fixed;
         z-index: 1;
-        background-image: url('~@/assets/soccer01em.jpg');
+        background-image: url('~@/assets/fussball_rasen.jpg');
         background-size: cover;
         width: 100%;
         height: 100%;
