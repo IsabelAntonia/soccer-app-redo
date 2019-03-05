@@ -17,8 +17,7 @@ export default {
 </script>
 
 <style>
- .chat{
-      background-repeat: no-repeat;
+ /* .chat{
         position: fixed;
         z-index: 1;
         background-image: url('~@/assets/soccer01em.jpg');
@@ -27,7 +26,7 @@ export default {
         height: 100%;
 
 
-    }
+    } */
 
    
 </style>

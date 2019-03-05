@@ -1,13 +1,16 @@
 <template>
     
-       <v-container style="height: 100%; display: flex; align-items: center; justify-content: center">
+       <v-container style="height: 100%; display: flex; align-items: center; justify-content: center; padding: 0">
       
 
        
-               <v-card style="height: 450px; width: 270px; padding: 15px">
+               <v-card style="height: 480px; width: 300px; margin-bottom: 55px; padding: 20px">
 
-               
-                  <v-card-text>
+               <v-card-title style="text-align: center; color: orange; font-size: 20px; padding: 0; font-weight: bold">Login to Northside Youth Soccer League</v-card-title>
+
+                  <v-card-text style="padding: 10px">
+
+                      
                       
              
                                    <v-text-field 
@@ -34,7 +37,7 @@
 
 
 
-                   <v-card-actions style="display: flex; justify-content: center">
+                   <v-card-actions style="display: flex; justify-content: center; padding-top: 0">
           <v-btn flat outline color="orange">Login</v-btn>
           
          
@@ -48,7 +51,7 @@
 <v-divider></v-divider>
       <!-- <br> -->
 <div style="display: flex; justify-content: center">
-    <v-btn flat outline color="orange" to="/schedule">Continue without Login</v-btn>
+    <v-btn flat outline color="orange" style="margin: 0" to="/schedule">Continue without Login</v-btn>
 </div>
 
     <br>
