@@ -12,6 +12,7 @@
                   <v-btn flat  color="orange" to="/signup">Signup</v-btn>
                   <v-btn flat  color="orange" to="/schedule">Schedule</v-btn>
                   <v-btn flat  color="orange" to="/chat">Chat</v-btn>
+                  <v-btn flat  color="orange" @click="logout">Logout</v-btn>
                   
                 
               </v-toolbar-items>
@@ -46,6 +47,14 @@
                      <router-link to="/chat">Chat</router-link>
                  </v-list-tile-title>
                  <v-divider></v-divider>
+
+        
+                    
+                     <v-btn class="ml-3" dark color="orange" @click='logout'>Logout</v-btn>
+
+               
+
+                 <v-divider></v-divider>
                 
                 
 
@@ -75,7 +84,24 @@ export default {
     return {
       sideNav: false
     }
-  }
+  },
+
+       methods: {
+            logout: function() {
+
+                firebase.auth().signOut().then(function() {
+                    // console.log('Signed Out');
+
+                }, function(error) {
+                    console.error('Sign Out Error', error);
+                });
+
+                this.$router.replace("login");
+            },
+
+        }
+
+
 }
 </script>
 

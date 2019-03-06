@@ -9,7 +9,7 @@ import Schedule from './views/Schedule.vue'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -52,3 +52,18 @@ export default new Router({
   
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  const currentUser = firebase.auth().currentUser;
+  //  firebase.auth().currentUser ? console.log(currentUser.email) : console.log('nobody logged in');
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+
+  if (requiresAuth && !currentUser) {
+    next('login');
+    alert("Please login to access the chat.")
+  } else {
+    next();
+  }
+});
+
+export default router;

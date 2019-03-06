@@ -38,7 +38,7 @@
 
 
                    <v-card-actions style="display: flex; justify-content: center; padding-top: 0">
-          <v-btn flat outline color="orange">Login</v-btn>
+          <v-btn flat outline color="orange" @click='login'>Login</v-btn>
           
          
         </v-card-actions>
@@ -84,6 +84,28 @@ export default {
         return {
             email: '',
             password: ''
+        }
+    },
+
+    methods: {
+
+        login(){
+
+                firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+                    .then((user) => {
+                    alert('You are logged in')
+                    this.$router.replace('chat');
+                })
+                          .catch((err) => {
+                    alert('Oops.' + err.message)
+                    this.$router.replace('login');
+                    this.password="";
+                    this.email="";
+                    
+               
+                    
+                });
+
         }
     }
 

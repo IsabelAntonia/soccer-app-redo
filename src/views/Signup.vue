@@ -35,7 +35,7 @@
 
 
                    <v-card-actions style="display: flex; justify-content: center; padding-top: 0">
-          <v-btn flat outline color="orange">Signup</v-btn>
+          <v-btn flat outline color="orange" @click="signup">Signup</v-btn>
         
          
         </v-card-actions>
@@ -71,6 +71,24 @@ export default {
             email: '',
             password: ''
         }
+    },
+
+
+    methods: {
+
+      signup(){
+
+                  firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(function(user){
+                    alert ('Your account has been created!')
+                },
+               function (err)  {
+                    alert ('Oops!'+ err.message)
+                } );    
+                
+                this.$router.replace('chat')
+
+
+      }
     }
 
 }
