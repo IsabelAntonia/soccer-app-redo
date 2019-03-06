@@ -85,7 +85,7 @@ export default {
       sideNav: false
     }
   },
-
+/* eslint-disable */
        methods: {
             logout: function() {
 

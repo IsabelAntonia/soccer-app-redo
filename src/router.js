@@ -47,12 +47,16 @@ const router = new Router({
     {
       path: '/chat',
       name: 'chat',
-      component: Chat
+      component: Chat,
+      meta: {
+        requiresAuth: true,
+      },
     },
   
   ]
 })
 
+/* eslint-disable */
 router.beforeEach((to, from, next) => {
   const currentUser = firebase.auth().currentUser;
   //  firebase.auth().currentUser ? console.log(currentUser.email) : console.log('nobody logged in');
