@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import Schedule from './views/Schedule.vue'
 import Chat from './views/Chat.vue'
 import Login from './views/Login.vue'
 import Signup from './views/Signup.vue'
 import Matchdetails from './views/Matchdetails.vue'
 import Schedule from './views/Schedule.vue'
+import firebase from 'firebase'
 
 Vue.use(Router)
 
@@ -60,11 +60,11 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   const currentUser = firebase.auth().currentUser;
   //  firebase.auth().currentUser ? console.log(currentUser.email) : console.log('nobody logged in');
-  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth); // search if the matched Array has some record with requiresAuth meta
 
-  if (requiresAuth && !currentUser) {
+  if (requiresAuth && !currentUser) { // if the route we want to navigate to requires authentication and there is no user 
     next('login');
-    alert("Please login to access the chat.")
+    alert("Please login to access the chat.") // if there is a currentUser or the route we want to navigate to does not require authentication, navigation will be successfull 
   } else {
     next();
   }

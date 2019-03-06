@@ -73,6 +73,7 @@
 </template>
 
 <script>
+import firebase from 'firebase'
 
 
 export default {
@@ -90,6 +91,7 @@ export default {
             logout: function() {
 
                 firebase.auth().signOut().then(function() {
+                  alert('You successfully logged out.')
                     // console.log('Signed Out');
 
                 }, function(error) {
