@@ -9,12 +9,15 @@
       <v-spacer></v-spacer>
       <v-toolbar-items>
 
- <v-btn v-if="currentUser" flat color="orange" @click="logout">Logout</v-btn>
+
 
         <v-btn v-if="currentUser === false" class="hidden-xs-only" flat color="orange" to="/login">Login</v-btn>
         <v-btn v-if="currentUser === false" class="hidden-xs-only" flat color="orange" to="/signup">Signup</v-btn>
         <v-btn class="hidden-xs-only" flat color="orange" to="/schedule">Schedule</v-btn>
         <v-btn class="hidden-xs-only" flat color="orange" to="/chat">Chat</v-btn>
+        <v-btn class="hidden-xs-only" flat color="orange" to="/about">About</v-btn>
+        <v-btn class="hidden-xs-only" flat color="orange" to="/rules">Rules of Play</v-btn>
+        <v-btn v-if="currentUser" flat color="orange" @click="logout">Logout</v-btn>
        
 
 
@@ -55,14 +58,19 @@
         </v-list-tile-title>
         <v-divider></v-divider>
 
+           <v-list-tile-title class="m-3 mt-4 mb-4">
+          <v-icon color='orange' class="mr-2">info</v-icon>
+          <router-link to="/about">About</router-link>
+        </v-list-tile-title>
 
+         <v-divider></v-divider>
 
-        <!-- <v-btn class="ml-3" dark color="orange" @click='logout'>Logout</v-btn> -->
+<v-list-tile-title class="m-3 mt-4 mb-4">
+          <v-icon color='orange' class="mr-2">feedback</v-icon>
+          <router-link to="/rules">Rules of Play</router-link>
+        </v-list-tile-title>
 
-
-
-        <v-divider></v-divider>
-
+ <v-divider></v-divider>
 
 
       </v-list>
@@ -92,10 +100,7 @@
       return {
         sideNav: false,
         currentUser: null,
-        loginButton: null,
-        signoutButton: null,
-        logoutButton: null,
-        hello: null
+     
       }
     },
 
@@ -127,27 +132,19 @@ beforeUpdate(){
 
         this.currentUser = firebase.auth().currentUser;
 
-        console.log(this.currentUser)
-
-        console.log(this.currentUser == null);
+  
 
         if (this.currentUser == null){ // if there is no user
 
 this.currentUser = false;
-this.loginButton = true;
-this.signupButton = true;
-this.logoutButton = false;
-this.hello = false;
+
 
         }
 
         else { // if there is a user
 
 this.currentUser = true;
-          this.loginButton = false;
-          this.signupButton = false;
-          this.logoutButton = true;
-          this.hello = true;
+      
 
 
         }

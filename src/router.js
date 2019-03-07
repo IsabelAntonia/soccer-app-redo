@@ -4,7 +4,9 @@ import Chat from './views/Chat.vue'
 import Login from './views/Login.vue'
 import Signup from './views/Signup.vue'
 import Matchdetails from './views/Matchdetails.vue'
+import About from './views/About.vue'
 import Schedule from './views/Schedule.vue'
+import Rules from './views/Rules.vue'
 import firebase from 'firebase'
 
 Vue.use(Router)
@@ -35,6 +37,18 @@ const router = new Router({
       path: '/schedule',
       name: 'schedule',
       component: Schedule
+    },
+
+    {
+      path: '/about',
+      name: 'about',
+      component: About
+    },
+
+    {
+      path: '/rules',
+      name: 'rules',
+      component: Rules
     },
 
     {

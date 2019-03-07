@@ -38,8 +38,7 @@
 
 
 
-            <p class="blue lighten-5" style="text-align: center;font-size: 12px; padding: 10px; border: 3px solid orange !important; color: orange;">Please
-                note that smoking is not permitted during any of our matches.</p>
+            <p class="blue lighten-5" style="text-align: center;font-size: 12px; padding: 10px; border: 3px solid orange !important; color: orange;">If deemed necessary by NYSL, games may be shortened or cancelled due to extreme weather conditions.</p>
         </v-card>
 
     </div>
