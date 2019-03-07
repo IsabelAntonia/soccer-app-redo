@@ -1,126 +1,179 @@
 <template>
-          <v-app>
-           
-
-          <v-toolbar dark class="blue lighten-5">
-              <v-toolbar-side-icon color='orange' @click="sideNav = true" class="hidden-sm-and-up"></v-toolbar-side-icon>
-
-              <v-toolbar-title style='color: orange'>Menu</v-toolbar-title>
-              <v-spacer></v-spacer>
-              <v-toolbar-items class="hidden-xs-only">
-                <v-btn flat  color="orange" to="/login">Login</v-btn>
-                  <v-btn flat  color="orange" to="/signup">Signup</v-btn>
-                  <v-btn flat  color="orange" to="/schedule">Schedule</v-btn>
-                  <v-btn flat  color="orange" to="/chat">Chat</v-btn>
-                  <v-btn flat  color="orange" @click="logout">Logout</v-btn>
-                  
-                
-              </v-toolbar-items>
-
-          </v-toolbar>
-          <v-navigation-drawer class="blue lighten-5" v-model="sideNav" absolute temporary>
-             <v-list>
-
-                 <v-list-tile-title class="m-3 mt-4 mb-4">
-                     <v-icon color='orange' class="mr-2">account_box</v-icon>
-                     <router-link to="/login">Login</router-link>
-                 </v-list-tile-title>
-                 <v-divider></v-divider>
+  <v-app>
 
 
-                 <v-list-tile-title class="m-3 mt-4 mb-4">
-                     <v-icon color='orange' class="mr-2">account_circle</v-icon>
-                     <router-link to="/signup">Signup</router-link>
-                 </v-list-tile-title>
-                 <v-divider></v-divider>
+    <v-toolbar dark class="blue lighten-5">
+      <v-toolbar-side-icon color='orange' @click="sideNav = true" class="hidden-sm-and-up"></v-toolbar-side-icon>
+
+      <v-toolbar-title style='color: orange'>Menu</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items>
+
+ <v-btn v-if="currentUser" flat color="orange" @click="logout">Logout</v-btn>
+
+        <v-btn v-if="currentUser === false" class="hidden-xs-only" flat color="orange" to="/login">Login</v-btn>
+        <v-btn v-if="currentUser === false" class="hidden-xs-only" flat color="orange" to="/signup">Signup</v-btn>
+        <v-btn class="hidden-xs-only" flat color="orange" to="/schedule">Schedule</v-btn>
+        <v-btn class="hidden-xs-only" flat color="orange" to="/chat">Chat</v-btn>
+       
 
 
-                  <v-list-tile-title class="m-3 mt-4 mb-4">
-                     <v-icon color='orange' class="mr-2">schedule</v-icon>
-                     <router-link to="/schedule">Schedule</router-link>
-                 </v-list-tile-title>
-                 <v-divider></v-divider>
+      </v-toolbar-items>
+
+    </v-toolbar>
 
 
-                  <v-list-tile-title class="m-3 mt-4 mb-4">
-                     <v-icon color='orange' class="mr-2">chat_bubble</v-icon>
-                     <router-link to="/chat">Chat</router-link>
-                 </v-list-tile-title>
-                 <v-divider></v-divider>
 
-        
-                    
-                     <v-btn class="ml-3" dark color="orange" @click='logout'>Logout</v-btn>
 
-               
+    <v-navigation-drawer class="blue lighten-5" v-model="sideNav" absolute temporary>
+      <v-list>
 
-                 <v-divider></v-divider>
-                
-                
+        <v-list-tile-title v-if="currentUser === false" class="m-3 mt-4 mb-4">
+          <v-icon color='orange' class="mr-2">account_box</v-icon>
+          <router-link to="/login">Login</router-link>
+        </v-list-tile-title>
+        <v-divider v-if="currentUser === false"></v-divider>
 
-                 </v-list>
 
-             </v-navigation-drawer>
-             
-             <v-content>
+        <v-list-tile-title v-if="currentUser === false" class="m-3 mt-4 mb-4">
+          <v-icon color='orange' class="mr-2">account_circle</v-icon>
+          <router-link to="/signup">Signup</router-link>
+        </v-list-tile-title>
+        <v-divider v-if="currentUser === false"></v-divider>
 
-<div class="background">
-             <router-view/>
-</div>
-             </v-content>
 
-           </v-app>
+        <v-list-tile-title class="m-3 mt-4 mb-4">
+          <v-icon color='orange' class="mr-2">schedule</v-icon>
+          <router-link to="/schedule">Schedule</router-link>
+        </v-list-tile-title>
+        <v-divider></v-divider>
+
+
+        <v-list-tile-title class="m-3 mt-4 mb-4">
+          <v-icon color='orange' class="mr-2">chat_bubble</v-icon>
+          <router-link to="/chat">Chat</router-link>
+        </v-list-tile-title>
+        <v-divider></v-divider>
+
+
+
+        <!-- <v-btn class="ml-3" dark color="orange" @click='logout'>Logout</v-btn> -->
+
+
+
+        <v-divider></v-divider>
+
+
+
+      </v-list>
+
+    </v-navigation-drawer>
+
+    <v-content>
+
+      <div class="background">
+        <router-view />
+      </div>
+    </v-content>
+
+  </v-app>
 </template>
 
 <script>
-import firebase from 'firebase'
+  import firebase from 'firebase'
 
 
-export default {
-  name: 'App',
+  export default {
+    name: 'App',
 
- 
-  
-  data () {
-    return {
-      sideNav: false
-    }
-  },
-/* eslint-disable */
-       methods: {
-            logout: function() {
 
-                firebase.auth().signOut().then(function() {
-                  alert('You successfully logged out.')
-                    // console.log('Signed Out');
 
-                }, function(error) {
-                    console.error('Sign Out Error', error);
-                });
+    data() {
+      return {
+        sideNav: false,
+        currentUser: null,
+        loginButton: null,
+        signoutButton: null,
+        logoutButton: null,
+        hello: null
+      }
+    },
 
-                this.$router.replace("login");
-            },
+created(){
+
+  this.checkUser();
+
+},
+
+beforeUpdate(){
+
+  this.checkUser();
+},
+
+    /* eslint-disable */
+    methods: {
+
+      logout() {
+
+        firebase.auth().signOut().then(() => {
+          alert('You successfully logged out.')
+          this.$router.replace('login')
+        })
+
+      },
+
+      checkUser(){
+
+
+        this.currentUser = firebase.auth().currentUser;
+
+        console.log(this.currentUser)
+
+        console.log(this.currentUser == null);
+
+        if (this.currentUser == null){ // if there is no user
+
+this.currentUser = false;
+this.loginButton = true;
+this.signupButton = true;
+this.logoutButton = false;
+this.hello = false;
+
+        }
+
+        else { // if there is a user
+
+this.currentUser = true;
+          this.loginButton = false;
+          this.signupButton = false;
+          this.logoutButton = true;
+          this.hello = true;
+
 
         }
 
 
-}
-</script>
 
-<style>
+      }
 
-.background{
-      /* background-repeat: no-repeat; */
-        position: fixed;
-        z-index: 1;
-        background-image: url('~@/assets/fussball_rasen.jpg');
-        background-size: cover;
-        width: 100%;
-        height: 100%;
 
 
     }
 
 
-</style>
+  }
+</script>
 
+<style>
+  .background {
+    /* background-repeat: no-repeat; */
+    position: fixed;
+    z-index: 1;
+    background-image: url('~@/assets/fussball_rasen.jpg');
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+
+
+  }
+</style>
