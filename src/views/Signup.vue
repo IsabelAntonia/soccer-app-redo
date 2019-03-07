@@ -80,22 +80,6 @@
         
         );
       }
-
-      // signup() {
-
-      //   firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(function (user) {
-      //       alert('Your account has been created!')
-      //       this.$router.replace('chat')
-      //     },
-      //     function (err) {
-      //       alert('Oops!' + err.message)
-      //       this.$router.replace('signup');
-      //     });
-
-
-
-
-      // }
     }
 
   }
