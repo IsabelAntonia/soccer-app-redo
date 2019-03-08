@@ -4,10 +4,7 @@
 
 <div class="chat" style='height: 100%;'>
 
-<!-- <div class="bubble">Lorem ipsum dolor sit amet
-   </div> -->
-
-   <div id="whiteDiv" style='display: flex; flex-direction: column; align-items: flex-start; overflow: scroll;'>
+   <div id="scrollDiv" style='display: flex; flex-direction: column; align-items: flex-start; overflow: scroll;'>
 
     <div v-for="(key,i) in messages" :key="i" class="bubble" :class="{right: key.name === loggedInUser}">
           <!-- the presence of the right class will be determined by whether key.name is the loggedInUser -->
@@ -16,6 +13,10 @@
             <p>{{key.message}}</p>
         </div>
 </div>
+
+
+
+
 
    <div class="fixed-bottom" style='height: 60px; width: 100%; background-color: white; display: flex; align-items: center'>
         <input id='textInput' style='border: 3px solid orange; width: 75%; height: 40px; margin-left: 10px; border-radius: 20px; padding: 10px; overflow: scroll' placeholder="Write your message" type="text">
@@ -49,7 +50,13 @@ export default {
 
     created(){
         this.getMessagesFromFirebase();
+     
        
+
+    },
+
+    updated(){
+   document.getElementById('scrollDiv').scrollTop = document.getElementById('scrollDiv').scrollHeight;
 
     },
 
@@ -57,7 +64,14 @@ export default {
     methods: {
           calculateHeight(){
 
-         document.querySelector('#whiteDiv').style.height = '200px'
+var screenHeight = window.screen.height;
+
+var calculatedHeight = screenHeight - (56 + 60);
+
+calculatedHeight = calculatedHeight + 'px'
+
+         document.querySelector('#scrollDiv').style.height = calculatedHeight;
+          
          
          },
 
@@ -69,7 +83,7 @@ export default {
                     message: text,
                     name: firebase.auth().currentUser.email
                 };
-                let userName = firebase.auth().currentUser.email;
+               
 
                 firebase.database().ref('chat').push(message); //push the message to firebase
                 document.getElementById('textInput').value ="";//empty the text input field again
@@ -81,6 +95,8 @@ export default {
 
                 firebase.database().ref('chat').on('value', (data) => {
                     this.messages = data.val();
+                 
+                 
                 })
             }
 
@@ -95,35 +111,17 @@ export default {
 
 .bubble 
 {
-position: relative;
-margin: 10px;
-width: auto;
-height: auto;
-padding: 20px;
-display: flex;
-flex-direction: column;
-text-align:center;
-align-items: center;
-justify-content: center;
-background: #FFFFFF;
-/* -webkit-border-radius: 10px;
--moz-border-radius: 10px; */
-border-radius: 10px;
-}
 
-/* .bubble:after 
-{
-content: '';
-position: absolute;
-border-style: solid;
-border-width: 7px 22px 7px 0;
-border-color: transparent #FFFFFF;
-display: block;
-width: 0;
-z-index: 1;
-left: -22px;
-top: 13px;
-} */
+margin: 10px;
+display: inline-block !important;
+max-width: 75vw;
+height: auto;
+text-align:center;
+word-break: break-all;
+padding: 14px;
+background: #FFFFFF;
+border-radius: 10px;;
+}
 
  .right {
         background-color: #E3F2FD;
