@@ -7,6 +7,7 @@ import Matchdetails from './views/Matchdetails.vue'
 import About from './views/About.vue'
 import Schedule from './views/Schedule.vue'
 import Rules from './views/Rules.vue'
+import Welcome from './views/Welcome.vue'
 import firebase from 'firebase'
 
 Vue.use(Router)
@@ -18,7 +19,7 @@ const router = new Router({
     {
       path: '/',
       name: 'welcome',
-      component: Login
+      component: Welcome
     },
 
     {

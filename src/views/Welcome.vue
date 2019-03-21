@@ -2,7 +2,11 @@
 
     <v-container style="height: 100%; display: flex; align-items: center; justify-content: center; padding: 0">
 
-        <v-card style="height: 480px; width: 300px; margin-bottom: 55px; padding: 20px">
+<Schedule v-if="currentUser"></Schedule>
+
+
+
+        <v-card v-if="currentUser === false" style="height: 480px; width: 300px; margin-bottom: 55px; padding: 20px">
 
             <v-card-title style="text-align: center; color: orange; font-size: 20px; padding: 0; font-weight: bold">Login
                 to Northside Youth Soccer League</v-card-title>
@@ -68,19 +72,30 @@
 
 <script>
     import firebase from 'firebase'
+    import Schedule from '../components/Schedule.vue'
     export default {
 
-        
+        components: {Schedule},
 
         data() {
             return {
                 email: '',
                 password: '',
-                
+                currentUser: null
             }
         },
 
-       
+        created(){
+
+  this.checkUser();
+
+},
+
+beforeUpdate(){
+
+  this.checkUser();
+},
+
         methods: {
 
             login() {
@@ -101,7 +116,31 @@
                     });
 
             },
-                  
+                  checkUser(){
+
+
+        this.currentUser = firebase.auth().currentUser;
+
+  
+
+        if (this.currentUser == null){ // if there is no user
+
+this.currentUser = false;
+
+
+        }
+
+        else { // if there is a user
+
+this.currentUser = true;
+      
+
+
+        }
+
+
+
+      }
         }
 
     }
