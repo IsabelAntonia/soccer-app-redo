@@ -26,7 +26,8 @@
 
 
 
-    <v-navigation-drawer class="blue lighten-5" v-model="sideNav" absolute temporary>
+    <v-navigation-drawer height="80vh"
+      width="250px" class="blue lighten-5" v-model="sideNav" absolute temporary>
       <v-list>
 
         <v-list-tile-title v-if="currentUser === false" class="m-3 mt-4 mb-4">
