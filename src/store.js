@@ -6,6 +6,7 @@ import VueAxios from 'vue-axios'
 Vue.use(Vuex)
 Vue.use(axios, VueAxios)
 
+
 export default new Vuex.Store({
   state: {
 
@@ -17,14 +18,14 @@ export default new Vuex.Store({
 
   },
   mutations: {
-    SET_MATCHES (state, matches){
+    SET_MATCHES(state, matches) {
       state.matches = matches;
     },
-    SET_ERRORED (state, error){
+    SET_ERRORED(state, error) {
       state.errored = true;
       state.error = error;
     },
-    SET_LOADING (state){
+    SET_LOADING(state) {
       state.isLoading = false;
     }
 
@@ -34,13 +35,13 @@ export default new Vuex.Store({
 
     fetchMatches({
       commit
-    }){
+    }) {
       axios
         .get('https://api.myjson.com/bins/hsmpa')
         // .get('https://.myjson.com/bins/hsmpa')
-        
+
         .then(response => response.data)
-        .then(matches =>{
+        .then(matches => {
           commit('SET_MATCHES', matches)
           commit('SET_LOADING');
         })
@@ -48,7 +49,7 @@ export default new Vuex.Store({
           // console.log(error);
           commit('SET_ERRORED', error)
           commit('SET_LOADING');
-          
+
         })
     }
 

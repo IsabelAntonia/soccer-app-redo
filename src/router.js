@@ -8,15 +8,15 @@ import About from './views/About.vue'
 import Schedule from './views/Schedule.vue'
 import Rules from './views/Rules.vue'
 import Welcome from './views/Welcome.vue'
-import firebase from 'firebase'
+import firebase from 'firebase/app'
+import 'firebase/auth'
 
 Vue.use(Router)
 
 const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes: [
-    {
+  routes: [{
       path: '/',
       name: 'welcome',
       component: Welcome
@@ -67,7 +67,7 @@ const router = new Router({
         requiresAuth: true,
       },
     },
-  
+
   ]
 })
 

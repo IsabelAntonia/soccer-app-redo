@@ -38,7 +38,8 @@
 </template>
 
 <script>
-import firebase from "firebase";
+import firebase from "firebase/app";
+import "firebase/auth";
 export default {
   data() {
     return {
@@ -53,7 +54,7 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then(user => {
-          alert("You are logged in");
+          alert("You are logged in " + user.user.email);
           this.$router.replace("chat");
         })
         .catch(err => {
